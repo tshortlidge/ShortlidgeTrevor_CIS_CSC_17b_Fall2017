@@ -13,28 +13,36 @@ and open the template in the editor.
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        
-        <h1>Welcome to Trevor's Storefront!</h1>
+
+        <h1>Welcome to eShop!</h1>
+
         <p> <b>Coca-Cola</b> - $1.69 </p>
         <a> <img src="http://www.cvs.com/bizcontent/merchandising/productimages/large/49000000443.jpg";
         </a>
-        <button onclick="addItemToCart('Coca-Cola',1.69,1)">add Coca-Cola to cart</button>
-         
+        <br></br>
+        <button onclick="addItemToCart('Coca-Cola',1.69,1)">add to cart</button>
+       <button onclick="callCart()">Check Total</button>
+
         <p> <b>Pepsi</b> - $1.60</p>
         <a> <img src="http://www.rashanghar.pk/image/cache/catalog/Pepsi%20500Ml-300x300.jpg";
         </a>
-        <button onclick="addItemToCart('Pepsi',1.60,1)">add Pepsi to cart</button>
+        <br></br>
+        <button onclick="addItemToCart('Pepsi',1.60,1)">add to cart</button>
+        <button onclick="callCart()">Check Total</button>
+
 
         <p> <b>Dr.Pepper</b> - $1.65</p>
         <a> <img src="http://stuffpoint.com/dr-pepper/image/8864-dr-pepper-bottle.jpg";
         </a>
-        <button onclick="addItemToCart('Dr.Pepper',1.65,1)">add Dr.Pepper to cart</button>       
+        <br></br>
+        <button onclick="addItemToCart('Dr.Pepper',1.65,1)">add to cart</button>
+        <button onclick="callCart()">Check Total</button>
 
         <p <br> </br></p>
-        <div id="button"><a href="checkOut.html">Proceed to Checkout</a></div>  
-        
-        
-        
-        
+        <button type="button"><a href="checkOut.html">Cart</a></div>
+
+
+
+
     </body>
 </html>

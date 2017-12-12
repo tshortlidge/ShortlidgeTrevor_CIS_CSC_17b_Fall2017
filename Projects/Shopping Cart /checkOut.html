@@ -6,38 +6,59 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>CheckOut</title>
+        <title>Your Cart</title>
         <script type="text/javascript" src="getSite.js"></script>
+        <script type="text/javascript" src="Cookie.js"></script>
+
 
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
-        
-        
-        <h1>Check Out</h1>
 
-        
-        
+
+        <h1>Your Cart</h1>
+
+
+
 
  <script>
         loadCart();
-     
+
          console.log(cart);
          listCart();
-        
-     
- </script>   
-    <div id="button"><a href="checkedOut.html">Confirm</a></div>
-    <div id="button"><a href="getSite.html">Go Back</a></div>
+
+         var text=JSON.stringify(cart);
+
+         setCookie("object",text,1);
+//         checkCookie("object");
+
+
+
+
+ </script>
+
+
+
     <br></br>
-    
-    <button onclick="clearCart()">Remove ALL from Cart</button>  
-   
+
+
+    <button onclick="removeItemFromCart('Coca-Cola'),window.location.reload()">Remove Item Coke</button>
+
+    <button onclick="removeItemFromCart('Pepsi'),window.location.reload()">Remove Item Pepsi</button>
+
+    <button onclick="removeItemFromCart('Dr.Pepper'),window.location.reload()">Remove Item Dr.Pepper</button>
+    <br></br>
+    <button onclick="clearCart(),window.location.reload()">Remove all items</button>
+
+    <br></br>
+
+        <div id="button"><a href="CheckedOut.php">Confirm Checkout</a></div>
+        <div id="button"><a href="getSite.html">Go Back</a></div>
 
 
 
-        
-        
+
+
     </body>
 </html>
