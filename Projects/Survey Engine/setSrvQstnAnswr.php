@@ -8,7 +8,7 @@
         // get the id from users
       $username = $_COOKIE['username'];
       $sql = "SELECT id_user, username, email, password FROM users WHERE username = '" . $username . "'";
-      $result = $conn->query($sql);
+      $result = $mysqli->query($sql);
       $row = $result->fetch_assoc();
       $id_user = $row['id_user'];            // get id throungh the cookies[username]
 

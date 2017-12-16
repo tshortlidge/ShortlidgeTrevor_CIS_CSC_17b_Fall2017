@@ -31,7 +31,7 @@ $row = $result->fetch_assoc();
 $id_survey = $row['id_survey'];
 
 
-echo "<h3>Survey Title: " . $title.'<br></h3>';
+echo "<h3>Survey Title: " . $title.'</h3>';
 
 //select question and answer from the database
 
@@ -82,7 +82,7 @@ echo "<a href='result.php?".$title."'>View Survey Result!</p>";
 </head>
 
 <body>
-	<br><br><br><br>
+	<br><br>
 	<p><button onclick="signout()">Sign Out</button><button onclick="signin()">Sign In</button></p>
 
 <script type="text/javascript">

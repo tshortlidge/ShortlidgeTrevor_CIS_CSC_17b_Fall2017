@@ -13,7 +13,7 @@
 </head>
 
 <body>
-<br><br><br><br>
+
 <h4 id='username'></h4>
 <p><button onclick="signin()">Sign In</button><button onclick="signout()">Sign Out</button></p>
 
@@ -40,33 +40,33 @@
 <script type="text/javascript">
 
             var x = getCookie("username");
-            document.getElementById('username').innerHTML = x + "";
-
+            document.getElementById("username").innerHTML = "Welcome, " + x + "!!";
 
 </script>
 
 
-
-<h5>Create a Survey</h5>
+<h1>Create a Survey</h1>
 
 <!-- <form name="getTitle" method="post" onsubmit="getTitle()">
 <p>Please enter your survey title:<input name="Title" type = "text"/></p>
 <input value ="Add Title" type="submit" />
 </form> -->
 
-<p>Survey Title: <input id="title" type="text" /></p>
-<button onclick="getTitle()">Submit title</button>
+<p>Survey Title: <input id="title" type="text"
+	><button onclick="getTitle()">Submit title</button></p> 
+
+
 <p><span id="titlename"></span></p>
 
  <form action = "setSurvey.php" method ="get">
-            <label>Question Number: </label><input name="Number" type="text" pattern="^[0-9]*$" size='50' /><br></br>
-            <label>Question:</label><input name="Question" type="text" size='80'/><br></br>
-            <label>Answer1:</label><input name="Answer1" type="text" size='80'/><br></br>
-            <label>Answer2:</label><input name="Answer2" type="text" size='80'/><br></br>
-            <label>Answer3:</label><input name="Answer3" type="text" size='80'/><br></br>
-            <label>Answer4:</label><input name="Answer4" type="text" size='80'/><br></br>
-            <label>Answer5:</label><input name="Answer5" type="text" size='80'/><br></br>
-            <input name="submit" value ="add Question to Survey" type="submit" />
+            <label>Question Number: </label><input name="Number" type="text" pattern="^[0-9]*$" size='5' /><br></br>
+            <label>Question:</label><input name="Question" type="text" size='100'/><br></br>
+            <label>Answer1:</label><input name="Answer1" type="text" size='40'/><br></br>
+            <label>Answer2:</label><input name="Answer2" type="text" size='40'/><br></br>
+            <label>Answer3:</label><input name="Answer3" type="text" size='40'/><br></br>
+            <label>Answer4:</label><input name="Answer4" type="text" size='40'/><br></br>
+            <label>Answer5:</label><input name="Answer5" type="text" size='40'/><br></br>
+            <input name="submit" value ="ADD Question" type="submit" />
         </form>
 
 <button name="setSurvey" value='Create New Survey' type="button" onclick="setSurvey()">Submit Survey</button>
@@ -74,11 +74,6 @@
 
 <script type="text/javascript">
 
-    //keep survey name shown on the page through stored in the localstorage
-	// var test_title = localStorage.getItem("title");
-	// if(test_title) {
- //        document.getElementById("titlename").innerHTML = "Survey Name: " + test_title;
-	// }
     var title = null;
 
 
@@ -99,7 +94,10 @@
 
             //get the survey name by input by user
             function getTitle() {
+
+
             	title = document.getElementById("title").value;
+
             	localStorage.setItem("title", title);
             	document.getElementById("titlename").innerHTML = "Survey Name: " + title;
 
@@ -167,6 +165,6 @@
 
  </script>
 
-<a href='viewSurvey.php'>View Surveys</a>
+
 </body>
 </html>

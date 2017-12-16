@@ -23,12 +23,13 @@ else { // User exists
 
 
 
+
         // This is how we'll know the user is logged in
         $_SESSION['logged_in'] = true;
-        setcookie("username", $user['email'],time()+3600);
+        setcookie("username", $user['username'],time()+3600);
 
 
-        header("location: setSurvey.php");
+        header("location: mainPage.html");
     }
     else  {
         $_SESSION['message'] = "You have entered wrong password, try again!";

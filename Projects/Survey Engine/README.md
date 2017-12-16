@@ -1,2 +1,0 @@
-# ShortlidgeTrevor_CIS_CSC_17b_Fall2017
-Assignments/Projects/lab

@@ -7,8 +7,6 @@ and open the template in the editor.
 <html>
     <head>
         <title>Survey Results</title>
-        <script type="text/javascript" src="cookies.js"></script>
-
     </head>
 
 
@@ -47,6 +45,7 @@ and open the template in the editor.
 	WHERE id_survey = $id_survey GROUP BY id_question";
 
 
+
     //display results
 	$result = $mysqli->query($sql);
 	if ($result->num_rows > 0) {
@@ -60,7 +59,6 @@ and open the template in the editor.
             $result_ans = $mysqli->query($sql);
             if ($result_ans->num_rows > 0) {
 				while($row_ans = $result_ans->fetch_assoc() ){
-
 					echo $row_ans['answer'].": ";
 
 					$ans_percent = ($row_ans['COUNT(*)'] / $row['count(*)']) * 100;
@@ -84,7 +82,7 @@ and open the template in the editor.
 
 <body>
 
-  <br><br><br><br>
+  <br><br>
 	<p><button onclick="signout()">Sign Out</button><button onclick="main_Page()">Main Page</button></p>
 
 <script type="text/javascript">
@@ -98,7 +96,7 @@ and open the template in the editor.
 
     function main_Page(){
 
-        window.location.assign("setSurvey.php");
+        window.location.assign("mainPage.html");
 
     }
     </script>

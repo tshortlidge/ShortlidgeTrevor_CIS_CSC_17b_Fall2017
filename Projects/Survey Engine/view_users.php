@@ -23,7 +23,7 @@
     <body>
         <?php
         // put your code here
-	        include 'db.php';
+	        include "sql/connect_mysql.php";
 
         $sql = "SELECT id_user, username, email, password FROM  users";
         $results = $mysqli->query($sql);
