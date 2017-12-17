@@ -1,7 +1,7 @@
 <?php
 session_start();
 $_SESSION['message'] = '';
-$mysqli = new mysqli("localhost", "root", "", "accounts");
+include 'sql/connect_mysql.php';
 
 //the form has been submitted with post
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $username = $mysqli->real_escape_string($_POST['username']);
         $email = $mysqli->real_escape_string($_POST['email']);
         $password = $mysqli->real_escape_string(password_hash($_POST['password'],PASSWORD_BCRYPT));
-
+        $amountspent = $mysqli->real_escape_string(0);
 
 
 
@@ -22,8 +22,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 
                 //inserts user data into database
-                $sql = "INSERT INTO users (username, email, password) "
-                        . "VALUES ('$username', '$email', '$password')";
+                $sql = "INSERT INTO users (username, email, password,amountspent) "
+                        . "VALUES ('$username', '$email', '$password','$amountspent')";
 
                 //if the query is successsful, redirect to regsuccess.html page
                 if ($mysqli->query($sql) === true){

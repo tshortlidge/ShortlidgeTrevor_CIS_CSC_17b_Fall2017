@@ -5,6 +5,7 @@
 	<script type="text/javascript" src="Question.js" ></script>
     <script type="text/javascript" src="getForm.js"></script>
     <script type="text/javascript" src="cookieFunction.js"></script>
+		<script type ="text/javascript" src="title.js"></script>
 
 
     <?php
@@ -13,24 +14,9 @@
 </head>
 
 <body>
+<h1>Create a Survey</h1>
 
 <h4 id='username'></h4>
-<p><button onclick="signin()">Sign In</button><button onclick="signout()">Sign Out</button></p>
-
-<script type="text/javascript">
-
-    function signout(){
-
-        window.location.assign("logout.php");
-
-    }
-
-    function signin(){
-
-        window.location.assign("Access.php");
-
-    }
-
 
 </script>
 
@@ -45,20 +31,11 @@
 </script>
 
 
-<h1>Create a Survey</h1>
-
-<!-- <form name="getTitle" method="post" onsubmit="getTitle()">
-<p>Please enter your survey title:<input name="Title" type = "text"/></p>
-<input value ="Add Title" type="submit" />
-</form> -->
-
-<p>Survey Title: <input id="title" type="text"
-	><button onclick="getTitle()">Submit title</button></p> 
 
 
-<p><span id="titlename"></span></p>
 
- <form action = "setSurvey.php" method ="get">
+<button type="button" onclick="inTitle()">Input Title</button>
+<form action = "setSurvey.php" method ="get">
             <label>Question Number: </label><input name="Number" type="text" pattern="^[0-9]*$" size='5' /><br></br>
             <label>Question:</label><input name="Question" type="text" size='100'/><br></br>
             <label>Answer1:</label><input name="Answer1" type="text" size='40'/><br></br>
@@ -67,7 +44,8 @@
             <label>Answer4:</label><input name="Answer4" type="text" size='40'/><br></br>
             <label>Answer5:</label><input name="Answer5" type="text" size='40'/><br></br>
             <input name="submit" value ="ADD Question" type="submit" />
-        </form>
+
+</form>
 
 <button name="setSurvey" value='Create New Survey' type="button" onclick="setSurvey()">Submit Survey</button>
 <p id="error"></p>
@@ -93,26 +71,21 @@
             }
 
             //get the survey name by input by user
-            function getTitle() {
+            function inTitle() {
 
-
-            	title = document.getElementById("title").value;
-
-            	localStorage.setItem("title", title);
-            	document.getElementById("titlename").innerHTML = "Survey Name: " + title;
+							var getTitle = prompt("Enter Title: ");
+							localStorage.setItem("title", getTitle);
 
             }
 
-			// var title = document.getElementById('title').value;
-            var newQuestion = new Question($_GET["Number"], $_GET["Question"], answers);
+            var qstn = new Question($_GET["Number"], $_GET["Question"], answers);
             length = $_GET["Number"];
-            localStorage.setItem(length, JSON.stringify(newQuestion));
+            localStorage.setItem(length, JSON.stringify(qstn));
             localStorage.setItem("length", length);
             for (var i = 1; i <= length; i++) {
                 var temp = localStorage.getItem(i);
                 var question = new Question(JSON.parse(temp));
-                question.display();
-                document.write('<button id="btn'+i+ '"' + 'onclick="deleteFunction(\''  + i + '\')">Delete</button>');
+								question.display();
             }
 
             if(length>0) {
@@ -120,42 +93,37 @@
             }
 
 
-            function deleteFunction(num){
-                localStorage.removeItem(num);
-//                    document.getElementById("btn"+num).innerHTML = "Already deleted!";
-//                    document.getElementById("btn"+num).style.color = "red";
 
-            }
-
-
-         	// store information in the cookies
+         	// stores information in the cookies
             function setSurvey(){
 
                 if(getCookie("username")){
                 var newlength = 0;
                 for (var i = 1; i <= length; i++) {
-                    var string_question = localStorage.getItem(i);
-                    if(string_question == null) {
+                    var qstnString = localStorage.getItem(i);
+                    if(qstnString == null) {
                         continue;
                     } else {
                         newlength++;
-                        localStorage.setItem(newlength, string_question);
+                        localStorage.setItem(newlength, qstnString);
                     }
                 }
                 localStorage.setItem("length", newlength);
                 length = newlength;
                 for (var i = 1; i <= length; i++) {
-                    var string_question = localStorage.getItem(i);
-                    setCookie("question" + i, string_question, 1);
+                    var qstnString = localStorage.getItem(i);
+                    setCookie("question" + i, qstnString, 1);
                 }
-                var string_title = localStorage.getItem("title");
-                setCookie("title",string_title, 1);
+                var titString = localStorage.getItem("title");
+                setCookie("title",titString, 1);
 
               	setCookie("length", length, 1);
 
-                window.location.assign("displaySurvey.php");
+                window.location.assign("viewSurvey.php");
             }else{
                 document.getElementById("error").innerHTML = "You have to sign in before creating any survey";
+								window.location.assign("login.php");
+
             }
 
 

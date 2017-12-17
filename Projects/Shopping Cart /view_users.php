@@ -1,114 +1,62 @@
-<?php # Script 10.5 - #5
-// This script retrieves all the records from the users table.
-// This new version allows the results to be sorted in different ways.
-$page_title = 'View the Current Users';
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>User Records</title>
+        <style>
+            table,th,td{
+                border: 1px dotted black;
+                border-collapse: collapse;
+                align: left;
+            }
 
 
-include('db.php');
+            th,tr,td{
+                padding: 5px;
+            }
 
+            caption{
+                font-size:15px;
+            }
 
-echo '<h1>Registered Users</h1>';
+            </style>
+    </head>
+    <body>
+        <?php
+        // put your code here
+        include "sql/connect_mysql.php";
 
-// Number of records to show per page:
-$display = 10;
-// Determine how many pages there are...
-if (isset($_GET['p']) && is_numeric($_GET['p'])) { // Already been determined.
-	$pages = $_GET['p'];
-} else { // Need to determine.
- 	// Count the number of records:
-	$q = "SELECT COUNT(id) FROM users";
-	$r = @mysqli_query ($mysqli, $q);
+        $sql = "SELECT id, username, email, password, amountspent FROM  users";
+        $results = $mysqli->query($sql);
 
-	$row = @mysqli_fetch_array ($r, MYSQLI_NUM);
-	$records = $row[0];
-	// Calculate the number of pages...
-	if ($records > $display) { // More than 1 page.
-		$pages = ceil ($records/$display);
-	} else {
-		$pages = 1;
-	}
-} // End of p IF.
-// Determine where in the database to start returning results...
-if (isset($_GET['s']) && is_numeric($_GET['s'])) {
-	$start = $_GET['s'];
-} else {
-	$start = 0;
-}
-// Determine the sort...
-// Default is by registration date.
-$sort = (isset($_GET['sort'])) ? $_GET['sort'] : 'rd';
-// Determine the sorting order:
-switch ($sort) {
-	case 'ln':
-		$order_by = 'email ASC';
-		break;
-	case 'fn':
-		$order_by = 'username ASC';
-		break;
+        echo "<table style ='width: 100%'>
+            <caption>User Records</caption>
+               <tr>
+               <th>Edit</th>
+               <th>Delete</th>
+               <th>Username</th>
+               <th>Email</th>
+               <th>Password</th>
+               <th>Ammount Spent</th>
+               </tr>";
+        if ($results->num_rows > 0) {
+            // output data of each row
+            while ($row = $results->fetch_assoc()) {
+                echo "<tr align='left'>";
+                echo "<td align='center'>" .'<a href="edit_user.php?'.$row['username'].'">Edit</a>'. "</td>";
+                echo "<td align='center'>" .'<a href="delete_user.php?'.$row['username'].'">Delete</a>'. "</td>";
+                echo "<td>" . $row['username'] . "</td>";
+                echo "<td>" . $row['email'] . "</td>";
+                echo "<td>" . $row['password'] . "</td>";
+                echo "<td>" . $row['amountspent'] ."</td>";
+                echo "</tr>";
+            }
+        } else {
+            echo "0 results";
+        }
+        ?>
 
-	default:
-		$order_by = 'id ASC';
-		$sort = 'id';
-		break;
-}
+        <button type="button"><a href="Access.php">Return to Login Page</a></div>
+        <button type="button"><a href="logout.php">Log-Out</a></div>
 
-// Define the query:
-$q = "SELECT username, email,password,  AS id FROM users ORDER BY $order_by LIMIT $start, $display";
-$r = @mysqli_query ($dbc, $q); // Run the query.
-// Table header:
-echo '<table align="center" cellspacing="0" cellpadding="5" width="75%">
-<tr>
-	<td align="left"><b>Edit</b></td>
-	<td align="left"><b>Delete</b></td>
-	<td align="left"><b><a href="view_users.php?sort=ln">email</a></b></td>
-	<td align="left"><b><a href="view_users.php?sort=fn">username</a></b></td>
-
-</tr>
-';
-// Fetch and print all the records....
-$bg = '#eeeeee';
-while ($row = mysqli_fetch_array($r, MYSQLI_ASSOC)) {
-	$bg = ($bg=='#eeeeee' ? '#ffffff' : '#eeeeee');
-		echo '<tr bgcolor="' . $bg . '">
-		<td align="left"><a href="edit_user.php?id=' . $row['id'] . '">Edit</a></td>
-		<td align="left"><a href="delete_user.php?id=' . $row['id'] . '">Delete</a></td>
-		<td align="left">' . $row['username'] . '</td>
-		<td align="left">' . $row['email'] . '</td>
-
-	</tr>
-	';
-} // End of WHILE loop.
-echo '</table>';
-mysqli_free_result ($r);
-mysqli_close($mysqli);
-// Make the links to other pages, if necessary.
-if ($pages > 1) {
-
-	echo '<br /><p>';
-	$current_page = ($start/$display) + 1;
-
-	// If it's not the first page, make a Previous button:
-	if ($current_page != 1) {
-		echo '<a href="view_users.php?s=' . ($start - $display) . '&p=' . $pages . '&sort=' . $sort . '">Previous</a> ';
-	}
-
-	// Make all the numbered pages:
-	for ($i = 1; $i <= $pages; $i++) {
-		if ($i != $current_page) {
-			echo '<a href="view_users.php?s=' . (($display * ($i - 1))) . '&p=' . $pages . '&sort=' . $sort . '">' . $i . '</a> ';
-		} else {
-			echo $i . ' ';
-		}
-	} // End of FOR loop.
-
-	// If it's not the last page, make a Next button:
-	if ($current_page != $pages) {
-		echo '<a href="view_users.php?s=' . ($start + $display) . '&p=' . $pages . '&sort=' . $sort . '">Next</a>';
-	}
-
-	echo '</p>'; // Close the paragraph.
-
-} // End of links section.
-
-
-?>
+    </body>
+</html>

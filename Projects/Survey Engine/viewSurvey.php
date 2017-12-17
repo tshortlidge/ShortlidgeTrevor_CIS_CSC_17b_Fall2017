@@ -8,10 +8,12 @@
 <?php
 
 include "sql/connect_mysql.php";
-echo "<br><br><br>";
+include "setSrvQstnAnswr.php";
+
+
 if(isset($_COOKIE['username'])){
 	$username = $_COOKIE['username'];
-	echo '<p>Survey Creator: '.$username.'<br>';
+	echo '<p>Survey Author: '.$username.'<br>';
 }
 
 $sql = "SELECT id_user FROM users WHERE username = '" . $username . "'";
@@ -29,7 +31,7 @@ WHERE id_user = '".$id_user."'";
 $result = $mysqli->query($sql);
 
 if ($result->num_rows > 0) {
-	echo "Survey Created: <br>";
+	echo "<br> List of Surveys: <br>";
 	while($row = $result->fetch_assoc() ){
 	echo "<a href='survey.php?".$row['title']."'>".$row['title']. "</p>";
 
@@ -40,7 +42,6 @@ if ($result->num_rows > 0) {
 
 </head>
 <body>
-
 
 </body>
 </html>

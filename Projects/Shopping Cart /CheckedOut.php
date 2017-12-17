@@ -7,20 +7,38 @@
     </head>
     <body>
       <h1>Receipt</h1>
-        <?php
-            //echo "Gotta Read the cookie </br>";
-            $text=$_COOKIE["object"];
-          // echo $text."</br>";
-            $myObj = json_decode($text);
-          //  echo '<pre>' . var_export($myObj, true) . '</pre>';
+      <?php
+      include ('sql/connect_mysql.php');
+      //$_COOKIE['balance'] = 2000;
 
 
 
+      //echo "HELLO";
+      if(isset($_COOKIE['username']) && isset($_COOKIE['amountspent']))
+      {
+
+      $username = $_COOKIE['username'];
+      $amountspent = $_COOKIE['amountspent'];
 
 
 
+      $result = $mysqli->query("SELECT * FROM users WHERE username='$username'");
+      $sql = "UPDATE users SET amountspent = '" . $amountspent . " 'WHERE username = '" . $username . "'";
 
-        ?>
+      if ($mysqli->query($sql) === TRUE ){
+
+      }
+      else {
+      echo "Error loading spent money in database. " . $mysqli->error;
+
+      }
+
+
+
+      }
+      //echo "HELLOMOTO";
+
+       ?>
         <script>
 
         listCart();

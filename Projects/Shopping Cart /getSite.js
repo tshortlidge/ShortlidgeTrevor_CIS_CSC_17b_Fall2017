@@ -118,7 +118,6 @@
 
           }
               var totalPrice = 0;
-
               for(var i in cart){
                   totalPrice += cart[i].price * cart[i].quantity;
 
@@ -127,8 +126,7 @@
 
 
 
-
-          str = JSON.stringify(cart);
+  //        str = JSON.stringify(cart);
 
 
 
@@ -159,11 +157,27 @@
           }
 
 
-        
+
 
 
 
            function saveCart(){
+
+             var totalPrice = 0;
+             for(var i in cart){
+                 totalPrice += cart[i].price * cart[i].quantity;
+
+             }
+             totalPrice.toFixed(2);
+             localStorage.setItem("amountspent", JSON.stringify(totalPrice));
+             var v = localStorage.getItem("amountspent");
+
+             var c = getCookie(amountspent);
+             setCookie("amountspent",c,);
+             var y = c + totalPrice;
+
+
+             setCookie("amountspent",y,1);
 
                localStorage.setItem("shoppingCart",JSON.stringify(cart));
 
@@ -172,10 +186,21 @@
 
 
           function loadCart(){
+            var totalPrice = 0;
+            for(var i in cart){
+                totalPrice += cart[i].price * cart[i].quantity;
+
+            }
+                totalPrice.toFixed(2);
               cart = JSON.parse(localStorage.getItem("shoppingCart"));
+
+
               if (cart === null){
 
                   cart = [];
+              }
+              if (totalPrice === null){
+                totalPrice = [];
               }
 
           }

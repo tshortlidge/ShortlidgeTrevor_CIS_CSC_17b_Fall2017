@@ -31,3 +31,7 @@ function checkCookie(cname) {
         }
     }
 }
+
+function deleteCookie(cname,cvalue,exdays) {
+// i cant figure out how to delete a cookie so my server UPDATES!!!!! its driving me bonkers!!!!!!!
+ }

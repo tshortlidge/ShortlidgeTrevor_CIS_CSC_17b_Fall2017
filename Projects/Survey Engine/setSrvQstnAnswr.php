@@ -17,7 +17,7 @@
     $sql = "INSERT INTO survey_entity (title, id_user) VALUES ('$title', '$id_user')";
 
     if ($mysqli->query($sql) === TRUE) {
-        echo "New record created successfully in the table survey_entity<br>";
+
     }else{
       echo 'Error:' . $sql . '<br/>' . $mysqli->error;
     }
@@ -38,13 +38,12 @@
           // get the user questions through cookies
           $questions = $_COOKIE['question'.$i];
           $qstn_array = json_decode($questions, true);
-          echo var_dump($qstn_array);
           $question = $qstn_array['qstn'];
 
                 //insert into the question_entity table
           $sql = "INSERT INTO question_entity (question, id_survey, id_user) VALUES ('$question', '$id_survey', '$id_user')";
           if ($mysqli->query($sql) === TRUE) {
-              echo "New record created successfully in the table question_entity";
+
           }else{
               echo 'Error:' . $sql . '<br/>' . $mysqli->error;
           }
@@ -62,7 +61,7 @@
               $sql = "INSERT INTO answer_entity (answer,choice, id_question, id_survey, id_user) VALUES ('$answer', '$choice', '$id_question',
               '$id_survey', '$id_user')";
               if ($mysqli->query($sql) === TRUE) {
-                    echo "New record created successfully in the table answer_entity<br>";
+
                 }else{
                 echo 'Error:' . $sql . '<br/>' . $mysqli->error;
               }

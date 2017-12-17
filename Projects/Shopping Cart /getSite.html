@@ -8,13 +8,21 @@ and open the template in the editor.
     <head>
         <title>Trevor's Storefront</title>
         <script type="text/javascript" src="getSite.js"></script>
+        <script type="text/javascript" src="Cookie.js"></script>
+
 
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
     <body>
 
+
         <h1>Welcome to eShop!</h1>
+        <p id="username" style= "color:white;"></p>
+        <script>
+
+        document.getElementById("username").innerHTML = "Welcome " + getCookie('username') + "to eShop!!";
+        </script>
 
         <p> <b>Coca-Cola</b> - $1.69 </p>
         <a> <img src="http://www.cvs.com/bizcontent/merchandising/productimages/large/49000000443.jpg";

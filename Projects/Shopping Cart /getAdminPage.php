@@ -1,4 +1,6 @@
 <?php
+session_start(); //Start the session
+
 echo "<table style='border: solid 1px black;'>";
  echo "<tr><th>Id</th><th>Username</th><th>Email</th><th>Passwords</th></tr>";
 
@@ -54,6 +56,7 @@ echo "</table>";
 
 
 <button type="button"><a href="Access.php">Return to Login Page</a></div>
+<button type="button"><a href="logout.php">Log-Out</a></div>
 
 
 </html>

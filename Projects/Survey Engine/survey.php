@@ -11,7 +11,7 @@ include "sql/connect_mysql.php";
 
 if(isset($_COOKIE['username'])){
 	$username = $_COOKIE['username'];
-	echo '<h3><p>Survey Creator: '.$username.'<br></h3>';}
+	echo '<h3><p>Survey Author: '.$username.'<br></h3>';}
 
 
 //select id
@@ -32,6 +32,7 @@ $id_survey = $row['id_survey'];
 
 
 echo "<h3>Survey Title: " . $title.'</h3>';
+
 
 //select question and answer from the database
 
@@ -71,6 +72,7 @@ while($row = $result->fetch_assoc() ){
     echo "</div>";
 
 	}
+
 }
 
 echo "<button type='submit'>Submit Survey</button><br>";
@@ -82,23 +84,7 @@ echo "<a href='result.php?".$title."'>View Survey Result!</p>";
 </head>
 
 <body>
-	<br><br>
-	<p><button onclick="signout()">Sign Out</button><button onclick="signin()">Sign In</button></p>
 
-<script type="text/javascript">
-
-    function signout(){
-
-        window.location.assign("logout.php");
-
-    }
-
-
-    function signin(){
-
-        window.location.assign("Access.php");
-
-    }
 
 
 </body>
